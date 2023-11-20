@@ -1,7 +1,7 @@
-import { lv, fakerLV, Faker } from '@faker-js/faker';
+import { et, fakerET, Faker } from '@faker-js/faker';
 
 export const faker = new Faker({
-  locale: [fakerLV, lv],
+  locale: [fakerET, et],
 });
 
 faker.seed(123);
