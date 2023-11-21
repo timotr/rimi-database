@@ -29,10 +29,11 @@ model Employee {
   bankAccountNumber String?
   userId            Int?
 
-  address Address? @relation(name: "employeeAddress", fields: [addressId], references: [id])
-  user    User?    @relation(name: "employeeUser", fields: [userId], references: [id])
-  Store   Store[]
-  Order   Order[]
+  address         Address?         @relation(name: "employeeAddress", fields: [addressId], references: [id])
+  user            User?            @relation(name: "employeeUser", fields: [userId], references: [id])
+  managerForStore Store[]          @relation(name: "managerForStore")
+  Order           Order[]
+  stores          StoreEmployees[] @relation(name: "storeEmployees-employee")
 }
 
 model Address {
@@ -60,9 +61,20 @@ model Store {
   addressId Int
   managerId Int
 
-  address Address  @relation(name: "storeAddress", fields: [addressId], references: [id])
-  manager Employee @relation(fields: [managerId], references: [id])
-  Order   Order[]
+  address   Address          @relation(name: "storeAddress", fields: [addressId], references: [id])
+  manager   Employee         @relation(name: "managerForStore", fields: [managerId], references: [id])
+  Order     Order[]
+  employees StoreEmployees[] @relation(name: "storeEmployees-store")
+}
+
+model StoreEmployees {
+  storeId    Int
+  employeeId Int
+
+  Employee Employee @relation(name: "storeEmployees-employee", fields: [employeeId], references: [id])
+  Store    Store    @relation(name: "storeEmployees-store", fields: [storeId], references: [id])
+
+  @@id([storeId, employeeId])
 }
 
 model Customer {
