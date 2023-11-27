@@ -13,7 +13,7 @@ export const et = {
     building_number: ["###","##","#"],
     street_name: streetNames,
     street_pattern: ["{{location.street_name}}"],
-    street_address: {normal: "{{location.streetName}}", full: "{{location.streetName}} {{location.buildingNumber}}"},
+    street_address: {normal: "{{location.street}}", full: "{{location.street}} {{location.buildingNumber}}"},
     secondary_address: ["","","","#","##"],
     postcode: ['#####'],
   },
